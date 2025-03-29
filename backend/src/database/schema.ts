@@ -1,4 +1,11 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -19,7 +26,8 @@ const products = pgTable("products", {
   name: text("name").notNull(),
   description: text("description"),
   price: integer("price").notNull(),
-  stock: integer("stock").notNull(),
+  quantity: integer("quantity").notNull(),
+  isDisabled: boolean("is_disabled").notNull().default(false),
   categoryId: integer("category_id").references(() => categories.id),
   createdAt: timestamp("created_at").defaultNow(),
 });

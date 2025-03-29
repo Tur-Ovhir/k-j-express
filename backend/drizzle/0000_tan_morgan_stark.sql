@@ -42,7 +42,8 @@ CREATE TABLE "products" (
 	"name" text NOT NULL,
 	"description" text,
 	"price" integer NOT NULL,
-	"stock" integer NOT NULL,
+	"quantity" integer NOT NULL,
+	"is_disabled" boolean DEFAULT false NOT NULL,
 	"category_id" integer,
 	"created_at" timestamp DEFAULT now()
 );
