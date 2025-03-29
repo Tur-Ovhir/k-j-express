@@ -1,5 +1,5 @@
 {
-  "id": "f16eca93-7590-44a6-a5d2-09fb1501dc5a",
+  "id": "1be01e12-ce4e-4812-8882-0a7cf1bee455",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -331,11 +331,18 @@
           "primaryKey": false,
           "notNull": true
         },
-        "stock": {
-          "name": "stock",
+        "quantity": {
+          "name": "quantity",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "is_disabled": {
+          "name": "is_disabled",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         },
         "category_id": {
           "name": "category_id",
