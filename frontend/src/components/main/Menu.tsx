@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "../ui/button";
-const Menu = () => {
+export const Menu = () => {
   return (
     <div className="">
       <div
@@ -24,4 +24,3 @@ const Menu = () => {
     </div>
   );
 };
-export default Menu;

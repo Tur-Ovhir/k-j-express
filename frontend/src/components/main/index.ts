@@ -1,5 +1,4 @@
-export * from "./Container"
-export *from"./Footer"
-export *from "./Header"
-export * from "./Menu"
-export * from "./Navbar"
+export * from "./Container";
+export * from "./Footer";
+export * from "./Menu";
+export * from "./Navbar";

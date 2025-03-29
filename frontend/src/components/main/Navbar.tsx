@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <div className="w-full bg-gradient-to-r from-yellow-200 to-yellow-400 p-4 shadow-xl rounded-lg bg-opacity-90 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto flex flex-wrap md:flex-nowrap items-center justify-between h-auto md:h-[80px] gap-4">
@@ -15,5 +15,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;

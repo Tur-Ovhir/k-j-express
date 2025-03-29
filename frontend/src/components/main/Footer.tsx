@@ -32,7 +32,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { FaFacebook } from "react-icons/fa";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className="w-full bg-gradient-to-r from-yellow-200 to-yellow-400 p-3 shadow-xl rounded-lg bg-opacity-90 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between h-auto md:h-[80px]">
@@ -54,4 +54,3 @@ const Footer = () => {
     </div>
   );
 };
-export default Footer;

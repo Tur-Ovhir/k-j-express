@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import Navbar from "@/components/main/Navbar";
-import Login from "./main/Login/page";
-import Footer from "@/components/main/Footer";
-import Menu from "@/components/main/Menu";
+import { Navbar, Footer, Menu } from "@/components/main";
+import Login from "./login/page";
 export default function Home() {
   return (
     <div className="flex flex-col gap-3 p-1">
@@ -29,9 +27,9 @@ export default function Home() {
           </div>
         ))}
       </div>
-      {/* <div>
+      <div>
         <Login />
-      </div> */}
+      </div>
       <div>
         <Footer />
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { useState } from "react";
-const Login = () => {
+export default function LoginPage() {
   const [password, setPassword] = useState("");
   return (
     <div className="min-h-screen w-screen flex items-center justify-center p-2">
@@ -29,5 +29,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-export default Login;
+}
