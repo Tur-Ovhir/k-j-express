@@ -11,7 +11,6 @@ export default function LoginPage() {
   const handleSubmit = () => {
     login(name);
   };
-
   return (
     <div className="min-h-screen w-screen flex items-center justify-center p-2">
       <div className="bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full sm:w-96 border border-gray-700">
