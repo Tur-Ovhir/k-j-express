@@ -4,11 +4,12 @@ import {
   getAllCategories,
   getCategoryById,
 } from "../controllers";
+import { authMiddleware } from "../middleware";
 
 const categoryRouter = Router();
 
 categoryRouter
-  .post("/", createCategory)
+  .post("/", authMiddleware, createCategory)
   .get("/", getAllCategories)
   .get("/:id", getCategoryById);
 
