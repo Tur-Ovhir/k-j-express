@@ -27,6 +27,7 @@ const products = pgTable("products", {
   description: text("description"),
   price: integer("price").notNull(),
   quantity: integer("quantity").notNull(),
+  images: text("images").array(),
   isDisabled: boolean("is_disabled").notNull().default(false),
   categoryId: integer("category_id").references(() => categories.id),
   createdAt: timestamp("created_at").defaultNow(),
