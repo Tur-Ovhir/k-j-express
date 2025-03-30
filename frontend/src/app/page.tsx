@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Navbar, Footer, Menu } from "@/components/main";
+import { Navbar, Footer, Menu, ProductCard } from "@/components/main";
 import Login from "./login/page";
 export default function Home() {
   return (
@@ -27,11 +27,14 @@ export default function Home() {
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         <Login />
-      </div>
+      </div> */}
       <div>
         <Footer />
+      </div>
+      <div>
+        <ProductCard />
       </div>
     </div>
   );
