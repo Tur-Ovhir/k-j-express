@@ -24,6 +24,7 @@ interface AuthContextType {
   login: (name: string) => void;
   logout: () => void;
   loading: boolean;
+  isReady: boolean;
 }
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<UserType | null>(null);
@@ -92,7 +93,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, isReady }}>
       {children}
     </AuthContext.Provider>
   );

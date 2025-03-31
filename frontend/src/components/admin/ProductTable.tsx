@@ -1,5 +1,6 @@
 "use client";
 
+import { productType } from "@/types/product";
 import {
   Table,
   TableBody,
@@ -11,7 +12,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { api } from "@/lib/axios";
-import { PencilLine, Trash, Trash2 } from "lucide-react";
+import { PencilLine, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
