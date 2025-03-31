@@ -9,3 +9,8 @@ export type productType = {
   categoryId: number;
   createdAt: string;
 };
+
+export type categoryType = {
+  id: number;
+  name: string;
+};

@@ -12,9 +12,10 @@ import {
   TableRow,
 } from "../ui/table";
 import { api } from "@/lib/axios";
-import { PencilLine, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { ProductEditDialog } from "./assets";
 
 export const ProductTable = () => {
   const [products, setProducts] = useState<productType[]>([]);
@@ -43,6 +44,22 @@ export const ProductTable = () => {
     0
   );
 
+  const handleProductDelete = async (productId: number) => {
+    const token = localStorage.getItem("token");
+    try {
+      await api.delete(`/product/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Амжилттай устгагдлаа");
+      getProducts();
+    } catch (error) {
+      console.error(error);
+      toast.error("Барааны устгах Үед алдаа гарлаа.");
+    }
+  };
+
   return (
     <Table className="sm:px-24">
       <TableCaption>Барааны мэдээлэлийн жагсаалт.</TableCaption>
@@ -61,7 +78,7 @@ export const ProductTable = () => {
       <TableBody>
         {products.map((invoice) => (
           <TableRow
-            className={invoice.isDisabled ? "line-through" : "line-through"}
+            className={invoice.isDisabled ? "line-through" : ""}
             key={invoice.id}
           >
             <TableCell className="font-medium">{invoice.id}</TableCell>
@@ -76,14 +93,15 @@ export const ProductTable = () => {
             </TableCell>
             <TableCell className="text-center">
               <div className="w-full flex justify-center">
-                <div className="border p-1 w-fit rounded-sm cursor-pointer bg-yellow-300">
-                  <PencilLine className="size-4" />
-                </div>
+                <ProductEditDialog productId={invoice.id} />
               </div>
             </TableCell>
             <TableCell className="text-end">
               <div className="w-full flex justify-center">
-                <div className="border p-1 w-fit rounded-sm cursor-pointer bg-red-300">
+                <div
+                  onClick={() => handleProductDelete(invoice.id)}
+                  className="border p-1 w-fit rounded-sm cursor-pointer bg-red-300"
+                >
                   <Trash2 className="size-4" />
                 </div>
               </div>

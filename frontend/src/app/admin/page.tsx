@@ -1,6 +1,7 @@
 "use client";
 
 import { ProductTable, UserTable } from "@/components/admin";
+import { ProductCreateDialog } from "@/components/admin/assets";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/components/utils/authProvider";
@@ -33,6 +34,7 @@ export default function AdminPage() {
           <div>Захиалгууд</div>
         </TabsContent>
         <TabsContent value="product">
+          <ProductCreateDialog />
           <ProductTable />
         </TabsContent>
         <TabsContent value="user">
