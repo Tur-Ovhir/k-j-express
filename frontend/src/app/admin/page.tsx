@@ -1,5 +1,7 @@
 "use client";
 
+import { ProductTable, UserTable } from "@/components/admin";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/components/utils/authProvider";
 
@@ -10,21 +12,33 @@ export default function AdminPage() {
     return null;
   }
   return (
-    <Tabs defaultValue="order" className="w-[400px]">
-      <TabsList className="grid w-full grid-cols-3 focus:bg-green-100">
-        <TabsTrigger value="order">Захиалгууд</TabsTrigger>
-        <TabsTrigger value="product">Бараанууд</TabsTrigger>
-        <TabsTrigger value="user">Хэрэглэгчид</TabsTrigger>
-      </TabsList>
-      <TabsContent value="order">
-        <div>Захиалгууд</div>
-      </TabsContent>
-      <TabsContent value="product">
-        <div>Бараанууд</div>
-      </TabsContent>
-      <TabsContent value="user">
-        <div>Хэрэглэгчид</div>
-      </TabsContent>
-    </Tabs>
+    <div className="p-2 space-y-4">
+      <div className="flex w-full justify-between">
+        <h1 className="text-3xl font-medium">Админ панел</h1>
+        <Button>гарах</Button>
+      </div>
+      <Tabs defaultValue="order">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger className="cursor-pointer" value="order">
+            Захиалгууд
+          </TabsTrigger>
+          <TabsTrigger className="cursor-pointer" value="product">
+            Бараанууд
+          </TabsTrigger>
+          <TabsTrigger className="cursor-pointer" value="user">
+            Хэрэглэгчид
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="order">
+          <div>Захиалгууд</div>
+        </TabsContent>
+        <TabsContent value="product">
+          <ProductTable />
+        </TabsContent>
+        <TabsContent value="user">
+          <UserTable />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
