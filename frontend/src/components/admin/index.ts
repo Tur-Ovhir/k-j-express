@@ -1,1 +1,1 @@
-import Card from "./ProductCard"
+import Card from "./ProductCard";
