@@ -16,9 +16,11 @@ import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ProductEditDialog } from "./assets";
+import { Skeleton } from "../ui/skeleton";
 
 export const ProductTable = () => {
   const [products, setProducts] = useState<productType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getProducts();
@@ -27,6 +29,7 @@ export const ProductTable = () => {
   const getProducts = async () => {
     const token = localStorage.getItem("token");
     try {
+      setLoading(true);
       const res = await api.get("/product", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -36,6 +39,8 @@ export const ProductTable = () => {
     } catch (error) {
       console.error(error);
       toast.error("Барааны мэдээлэл алдаатай байна.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,6 +81,20 @@ export const ProductTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
+        {loading &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <Skeleton className="h-4 w-16" />
+              </TableCell>
+              <TableCell colSpan={6} className="text-center">
+                <Skeleton className="h-4 w-32 mx-auto" />
+              </TableCell>
+              <TableCell className="text-end">
+                <Skeleton className="h-4 w-16" />
+              </TableCell>
+            </TableRow>
+          ))}
         {products.map((invoice) => (
           <TableRow
             className={invoice.isDisabled ? "line-through" : ""}
