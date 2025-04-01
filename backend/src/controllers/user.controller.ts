@@ -76,6 +76,16 @@ export const loginUser: RequestHandler = async (req, res) => {
   }
 };
 
+export const getAllUsers: RequestHandler = async (req, res) => {
+  try {
+    const usersList = await db.select().from(users);
+
+    res.status(200).json(usersList);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error });
+  }
+};
+
 export const getMe = async (req: CustomRequest, res: Response) => {
   try {
     if (!req.user) {
