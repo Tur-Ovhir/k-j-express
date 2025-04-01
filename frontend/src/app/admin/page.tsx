@@ -1,13 +1,13 @@
 "use client";
 
-import { ProductTable, UserTable } from "@/components/admin";
+import { OrderTable, ProductTable, UserTable } from "@/components/admin";
 import { ProductCreateDialog } from "@/components/admin/assets";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/components/utils/authProvider";
 
 export default function AdminPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   if (!user || user.role !== "admin") {
     return null;
@@ -16,7 +16,9 @@ export default function AdminPage() {
     <div className="p-2 space-y-4">
       <div className="flex w-full justify-between">
         <h1 className="text-3xl font-medium">Админ панел</h1>
-        <Button>гарах</Button>
+        <Button className="cursor-pointer" onClick={logout}>
+          гарах
+        </Button>
       </div>
       <Tabs defaultValue="order">
         <TabsList className="grid w-full grid-cols-3">
@@ -31,7 +33,7 @@ export default function AdminPage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="order">
-          <div>Захиалгууд</div>
+          <OrderTable />
         </TabsContent>
         <TabsContent value="product">
           <ProductCreateDialog />

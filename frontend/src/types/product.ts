@@ -14,3 +14,16 @@ export type categoryType = {
   id: number;
   name: string;
 };
+
+export type userType = {
+  id: number;
+  name: string;
+};
+
+export type orderType = {
+  id: number;
+  userId: number;
+  totalAmount: number;
+  status: string;
+  items: productType[];
+};
