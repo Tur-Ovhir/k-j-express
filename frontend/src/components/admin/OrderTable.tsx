@@ -23,7 +23,7 @@ import { toast } from "sonner";
 import { orderType, userType } from "@/types/product";
 import { status } from "../utils/status";
 import { Skeleton } from "../ui/skeleton";
-import { Expand } from "lucide-react";
+import { OrderDetailsDialog } from "./assets";
 export const OrderTable = () => {
   const [orders, setOrders] = useState<orderType[]>([]);
   const [users, setUsers] = useState<userType[]>([]);
@@ -170,10 +170,10 @@ export const OrderTable = () => {
               </Select>
             </TableCell>
             <TableCell className="text-center flex items-center gap-2 justify-center  h-full">
-              <p className="border px-2 rounded-full bg-gray-300">{1} төрөл</p>
-              <div className="border w-fit rounded-sm p-1">
-                <Expand className="w-4 h-4" />
-              </div>
+              <p className="border px-2 rounded-full bg-gray-300">
+                {order.itemCount} төрөл
+              </p>
+              <OrderDetailsDialog products={order.items} />
             </TableCell>
             <TableCell className="text-end">
               {order.totalAmount.toLocaleString()} ₮
