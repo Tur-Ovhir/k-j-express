@@ -21,14 +21,20 @@ export const getAllOrders: RequestHandler = async (_req, res) => {
             productId: orderItems.productId,
             quantity: orderItems.quantity,
             price: orderItems.price,
+            name: products.name,
           })
           .from(orderItems)
+          .innerJoin(products, eq(orderItems.productId, products.id))
           .where(eq(orderItems.orderId, order.id));
 
         return {
           ...order,
           items,
           itemCount: items.length,
+          calculatedTotal: items.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          ),
         };
       })
     );

@@ -26,4 +26,5 @@ export type orderType = {
   totalAmount: number;
   status: string;
   items: productType[];
+  itemCount: number;
 };
