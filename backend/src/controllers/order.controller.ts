@@ -14,7 +14,26 @@ export const getAllOrders: RequestHandler = async (_req, res) => {
   try {
     const allOrders = await db.select().from(orders);
 
-    res.status(200).json(allOrders);
+    const ordersWithItems = await Promise.all(
+      allOrders.map(async (order) => {
+        const items = await db
+          .select({
+            productId: orderItems.productId,
+            quantity: orderItems.quantity,
+            price: orderItems.price,
+          })
+          .from(orderItems)
+          .where(eq(orderItems.orderId, order.id));
+
+        return {
+          ...order,
+          items,
+          itemCount: items.length,
+        };
+      })
+    );
+
+    res.status(200).json(ordersWithItems);
   } catch (error) {
     res.status(500).json({ message: "Internal server error", error });
   }

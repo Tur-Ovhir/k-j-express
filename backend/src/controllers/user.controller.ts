@@ -78,7 +78,12 @@ export const loginUser: RequestHandler = async (req, res) => {
 
 export const getAllUsers: RequestHandler = async (req, res) => {
   try {
-    const usersList = await db.select().from(users);
+    const usersList = await db
+      .select({
+        id: users.id,
+        name: users.name,
+      })
+      .from(users);
 
     res.status(200).json(usersList);
   } catch (error) {
@@ -94,7 +99,11 @@ export const getMe = async (req: CustomRequest, res: Response) => {
     }
 
     const [user] = await db
-      .select()
+      .select({
+        id: users.id,
+        name: users.name,
+        role: users.role,
+      })
       .from(users)
       .where(eq(users.id, req.user.userId))
       .limit(1);
