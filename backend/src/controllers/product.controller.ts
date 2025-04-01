@@ -27,7 +27,8 @@ export const createProduct: RequestHandler = async (req, res) => {
 
 export const updateProduct: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, images, quantity, categoryId } = req.body;
+  const { name, description, price, images, quantity, categoryId, isDisabled } =
+    req.body;
 
   try {
     const updatedProduct = await db
@@ -36,6 +37,7 @@ export const updateProduct: RequestHandler = async (req, res) => {
         name,
         description,
         images,
+        isDisabled,
         price: price ? parseInt(price) : undefined,
         quantity: quantity ? parseInt(quantity) : undefined,
         categoryId: categoryId ? parseInt(categoryId) : null,
