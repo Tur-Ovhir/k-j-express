@@ -11,7 +11,7 @@ export const getCart = async (req: CustomRequest, res: Response) => {
       return;
     }
 
-    const userId = req.user.userId;
+    const userId = req.user?.userId;
 
     const cart = await db
       .select({

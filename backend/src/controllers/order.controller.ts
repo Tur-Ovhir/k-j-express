@@ -52,7 +52,7 @@ export const getOrders = async (req: CustomRequest, res: Response) => {
       return;
     }
 
-    const userId = req.user.userId;
+    const userId = req.user?.userId;
 
     const userOrders = await db
       .select()
@@ -103,7 +103,7 @@ export const createOrder = async (req: CustomRequest, res: Response) => {
       return;
     }
 
-    const userId = req.user.userId;
+    const userId = req.user?.userId;
 
     const userCart = await db
       .select()

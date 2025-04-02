@@ -98,6 +98,8 @@ export const getMe = async (req: CustomRequest, res: Response) => {
       return;
     }
 
+    const userId = req.user?.userId;
+
     const [user] = await db
       .select({
         id: users.id,
@@ -105,7 +107,7 @@ export const getMe = async (req: CustomRequest, res: Response) => {
         role: users.role,
       })
       .from(users)
-      .where(eq(users.id, req.user.userId))
+      .where(eq(users.id, userId))
       .limit(1);
 
     if (!user) {
