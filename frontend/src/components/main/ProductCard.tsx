@@ -102,6 +102,9 @@ export const ProductCard = ({
             <h2 className="text-lg font-semibold text-gray-700">
               {product.price.toLocaleString()}₮
             </h2>
+            <h3 className="text-lg font-bold text-gray-800">
+              Нийт үнэ: {(product.price * quantity).toLocaleString()}₮
+            </h3>
             <div className="flex items-center space-x-4">
               <Button
                 onClick={decreaseQuantity}
