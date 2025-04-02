@@ -1,6 +1,7 @@
 "use client";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -15,18 +16,64 @@ import {
   SelectValue,
 } from "../ui/select";
 import { ShoppingBasket } from "lucide-react";
-import { ProductCard } from "./ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
+import { api } from "@/lib/axios";
+import { toast } from "sonner";
+import { cartType } from "@/types/product";
 export const Shop = () => {
   const [selectedPayment, setSelectedPayment] = useState("");
+  const [cart, setCart] = useState<cartType[]>([]);
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  useEffect(() => {
+    setSelectedPayment("");
+  }, [cart]);
+
+  const getCart = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await api.get("/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCart(res.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Барааны мэдээлэл алдаатай байна.");
+    }
+  };
+
+  const handleOrder = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await api.post(
+        "/order",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Захиалга амжилттай хийгдлээ");
+      setCart([]);
+    } catch (error) {
+      console.error(error);
+      toast.error("Захиалга хийхэд алдаа гарлаа!");
+    }
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className="fixed flex items-center justify-center z-10 bottom-4 right-4 sm:bottom-8 sm:right-8 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg rounded-full w-14 h-14 border border-white transition-transform hover:scale-105">
           <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-yellow-400 text-white text-xs flex items-center justify-center shadow-md">
-            {ProductCard.length}
+            {cart.length}
           </div>
           <ShoppingBasket size={24} />
         </div>
@@ -35,6 +82,14 @@ export const Shop = () => {
         <DialogTitle className="text-lg font-bold text-gray-800">
           Захиалга
         </DialogTitle>
+        <div>
+          {cart.map((item, index) => (
+            <div key={index}>
+              <div>Барааа их хэмжээний урттай</div>
+              <div>{item.price}₮</div>
+            </div>
+          ))}
+        </div>
         <Select onValueChange={(value) => setSelectedPayment(value)}>
           <SelectTrigger className="mt-3 w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yellow-500">
             <SelectValue placeholder="Төлбөрийн нөхцөл сонгох" />
@@ -59,7 +114,7 @@ export const Shop = () => {
             <div className="">
               <h1 className="text-sm font-bold ">
                 Уучлаарай та дээрх дансаар төлбөр төлсний дараа захиалах хэсгийг
-                дарна уу! Баярлалаа.{" "}
+                дарна уу! Баярлалаа.
               </h1>
             </div>
             <div className="flex justify-center ">
@@ -67,9 +122,23 @@ export const Shop = () => {
             </div>
           </div>
         )}
-        <Button className="mt-4 w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white font-semibold rounded-lg hover:opacity-90 transition-all shadow-md">
-          Захиалах
-        </Button>
+        {selectedPayment === "qpay" && cart.length != 0 ? (
+          <DialogClose asChild>
+            <Button
+              onClick={handleOrder}
+              className="mt-4 w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white font-semibold rounded-lg hover:opacity-90 transition-all shadow-md"
+            >
+              Захиалах
+            </Button>
+          </DialogClose>
+        ) : (
+          <Button
+            disabled
+            className="mt-4 w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white font-semibold rounded-lg hover:opacity-90 transition-all shadow-md"
+          >
+            Захиалах
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );

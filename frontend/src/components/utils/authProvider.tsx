@@ -76,6 +76,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setUser(res.data.user);
     } catch (error) {
       console.error(error);
+      localStorage.removeItem("token");
+      router.replace("/login");
       toast.error("Хэрэглэгчийн мэдээлэл буруу!");
     }
   };
