@@ -21,9 +21,14 @@ import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { api } from "@/lib/axios";
 import { toast } from "sonner";
 import { cartType } from "@/types/product";
-export const Shop = () => {
+export const Shop = ({
+  cart,
+  setCart,
+}: {
+  cart: cartType[];
+  setCart: React.Dispatch<React.SetStateAction<cartType[]>>;
+}) => {
   const [selectedPayment, setSelectedPayment] = useState("");
-  const [cart, setCart] = useState<cartType[]>([]);
 
   useEffect(() => {
     getCart();

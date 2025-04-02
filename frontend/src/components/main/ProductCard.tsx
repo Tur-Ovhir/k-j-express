@@ -10,12 +10,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
-import { productType } from "@/types/product";
+import { cartType, productType } from "@/types/product";
 import Image from "next/image";
 import { api } from "@/lib/axios";
 import { toast } from "sonner";
 
-export const ProductCard = ({ product }: { product: productType }) => {
+export const ProductCard = ({
+  product,
+  setCart,
+}: {
+  product: productType;
+  setCart: React.Dispatch<React.SetStateAction<cartType[]>>;
+}) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddCart = async () => {
@@ -30,6 +36,13 @@ export const ProductCard = ({ product }: { product: productType }) => {
           },
         }
       );
+      const response = await api.get("/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCart(response.data);
       toast.success("Сагсанд бараа нэмэгдлээ");
     } catch (error) {
       console.error(error);
