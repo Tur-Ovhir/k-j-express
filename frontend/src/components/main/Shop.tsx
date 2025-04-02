@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { api } from "@/lib/axios";
@@ -68,6 +68,24 @@ export const Shop = () => {
     }
   };
 
+  const removeCart = async (cartId: number) => {
+    try {
+      const token = localStorage.getItem("token");
+      await api.delete(`/cart/${cartId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCart((prevCart) => prevCart.filter((item) => item.id !== cartId));
+    } catch (error) {
+      console.error(error);
+      toast.error("Захиалга хийхэд алдаа гарлаа!");
+    }
+  };
+  const totalAmount = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -84,11 +102,24 @@ export const Shop = () => {
         </DialogTitle>
         <div>
           {cart.map((item, index) => (
-            <div key={index}>
-              <div>Барааа их хэмжээний урттай</div>
-              <div>{item.price}₮</div>
+            <div className="flex gap-4 items-center" key={index}>
+              <div className="flex gap-2 items-center">
+                <div>{item.name}</div>
+                <div>{item.quantity}</div>
+                <div>x</div>
+                <div>{item.price.toLocaleString()}₮</div>
+              </div>
+              <button
+                className="cursor-pointer"
+                onClick={() => removeCart(item.id)}
+              >
+                <Trash2 className="text-red-500 w-5 h-5" />
+              </button>
             </div>
           ))}
+          <div className="font-bold text-lg mt-2 text-end">
+            {totalAmount.toLocaleString()}₮
+          </div>
         </div>
         <Select onValueChange={(value) => setSelectedPayment(value)}>
           <SelectTrigger className="mt-3 w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yellow-500">

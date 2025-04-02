@@ -37,7 +37,8 @@ export const ProductCard = ({ product }: { product: productType }) => {
     }
   };
 
-  const increaseQuantity = () => setQuantity((prev) => prev + 1);
+  const increaseQuantity = () =>
+    setQuantity((prev) => (prev < product.quantity ? prev + 1 : prev));
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
