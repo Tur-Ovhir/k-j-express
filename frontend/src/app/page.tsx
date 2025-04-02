@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { productType } from "@/types/product";
 import { api } from "@/lib/axios";
 import { toast } from "sonner";
-
+import { Shop } from "@/components/main/Shop";
 export default function Home() {
   const [products, setProducts] = useState<productType[]>([]);
 
@@ -59,6 +59,9 @@ export default function Home() {
       </div>
       <div>
         <Footer />
+      </div>
+      <div>
+        <Shop />
       </div>
       <div>
         <ProductCard />
