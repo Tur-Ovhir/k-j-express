@@ -28,3 +28,11 @@ export type orderType = {
   items: productType[];
   itemCount: number;
 };
+
+export type cartType = {
+  id: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  name: string;
+};
