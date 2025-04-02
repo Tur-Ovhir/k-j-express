@@ -41,6 +41,7 @@ export default function Home() {
             <div className="w-full sm:w-[300px] md:w-[350px] flex flex-col items-center bg-gradient-to-r border-2  border-amber-200 p-4 shadow-xl rounded-lg bg-opacity-90 backdrop-blur-lg">
               <div className="w-full h-[200px] flex items-center justify-center overflow-hidden rounded-lg">
                 <Image
+                  className="rounded-xl"
                   src={product.images[0]}
                   alt={product.name}
                   width={200}
