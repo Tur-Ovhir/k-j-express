@@ -13,6 +13,11 @@ export const getCart = async (req: CustomRequest, res: Response) => {
 
     const userId = req.user?.userId;
 
+    const [userCart] = await db
+      .select()
+      .from(carts)
+      .where(eq(carts.userId, userId));
+
     const cart = await db
       .select({
         id: cartItems.id,
@@ -24,7 +29,7 @@ export const getCart = async (req: CustomRequest, res: Response) => {
       })
       .from(cartItems)
       .innerJoin(products, eq(cartItems.productId, products.id))
-      .where(eq(cartItems.cartId, userId));
+      .where(eq(cartItems.cartId, userCart.id));
 
     res.status(200).json(cart);
   } catch (error) {
