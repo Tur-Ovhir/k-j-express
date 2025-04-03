@@ -5,6 +5,7 @@ import { cartType } from "@/types/product";
 import { api } from "@/lib/axios";
 import { toast } from "sonner";
 import { Skeleton } from "../ui/skeleton";
+
 export const Menu = ({
   setCategoryId,
   loading,
@@ -55,6 +56,19 @@ export const Menu = ({
             </Button>
           ))
         )}
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="mt-3 text-center text-lg justify-center items-center font-bold flex flex-col gap-2 bg-gradient-to-r from-yellow-200 to-yellow-400 p-4 shadow-lg rounded-b-2xl bg-opacity-90 backdrop-blur-lg">
+          <div className="flex flex-row gap-2">
+            <h1>Жимс,Хүнс (Бэлэн12цаг дотор хүргэгдэнэ) </h1>
+          </div>
+          <div className="flex flex-row gap-2">
+            <h1>
+              Гоо сайхан,эрүүл мэндийн бүтээгдэхүүн захиалгаар (Агаарын тээврээр
+              7-10 хоногт)
+            </h1>
+          </div>
+        </div>
       </div>
     </div>
   );
