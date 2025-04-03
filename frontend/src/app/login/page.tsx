@@ -13,12 +13,13 @@ export default function LoginPage() {
   };
   return (
     <div className="min-h-screen w-screen flex items-center justify-center p-2">
-      <div className="bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full sm:w-96 border border-gray-700">
-        <div className="flex flex-row gap-1">
-          <h2 className="font-semibold text-gold-400 text-center mb-6">
-            Дугаараа оруулна уу!
+      <div className="bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full sm:w-96 border border-gray-700 flex flex-col gap-2">
+        <div className="flex flex-col ">
+          <h2 className="font-semibold text-gold-400 text-center mb-6 flex flex-row gap-1">
+            Welcome to K&J Express Mongolia
+            <FaRegFaceSmileBeam className="text-yellow-600 w-6 h-6" />
           </h2>
-          <FaRegFaceSmileBeam className="text-yellow-600 w-6 h-6" />
+          <h2 className="font-semibold">Та утасны дугаараа оруулна уу!</h2>
         </div>
         <div className="mb-4">
           <input
